@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Редактирование новости</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/create.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__left">
+        <a href="./index.html" class="header__logo">
+          <img src="./img/logo.svg" alt="Логотип" />
+        </a>
+
+        <nav class="header__nav">
+          <ol class="header__nav-list">
+            <li>
+              <a
+                href="./index.html"
+                class="header__nav-link header__nav-link--active"
+                aria-current="page"
+              >
+                Новости
+              </a>
+            </li>
+
+            <li>
+              <a href="./categories.html" class="header__nav-link">
+                Категории
+              </a>
+            </li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="header__auth">
+        <a href="./login.html" class="button button--red">Войти</a>
+      </div>
+    </header>
+
+    <div class="create-container">
+      <h2 class="create-title">Редактирование новости</h2>
+
+      <label class="create-label">Название</label>
+      <input type="text" class="name-input" placeholder="Введите название" />
+
+      <label class="create-label">Категория</label>
+      <select class="category-input">
+        <option value="">Выберите категорию</option>
+        <option value="1">Спорт</option>
+        <option value="2">Политика</option>
+        <option value="3">Технологии</option>
+      </select>
+
+      <label class="create-label">Обложка</label>
+      <div class="file-box">
+        <button class="file-btn">Выбрать файл</button>
+        <span class="file-text">Не выбран файл</span>
+        <input type="file" class="cover-input" id="cover-input" />
+      </div>
+
+      <label class="create-label">Контент</label>
+      <textarea class="content-input"></textarea>
+
+      <button class="create-button">Сохранить изменения</button>
+    </div>
+    <script src="script/edit.js"></script>
+  </body>
+</html>
