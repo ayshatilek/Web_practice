@@ -1,102 +1,64 @@
 //1 zadanie
-fetch("https://jsonplaceholder.typicode.com/posts/1")
-  .then(response => response.json())
-  .then(data => {
-    console.log("Задание 1:");
-    console.log("title:", data.title);
-    console.log("body:", data.body);
-  });
+//AJAX это технология, позволяющая отправлять запросы на сервер и получать данные без перезагрузки страницы.
+//Пример: Instagram — загрузка постов, Telegram — новые сообщения
 
-//2 zadanie
-fetch("https://jsonplaceholder.typicode.com/posts", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    title: "Новый пост",
-    body: "Содержимое поста",
-    userId: 1
-  })
-})
-.then(response => response.json())
-.then(data => {
+// 2 zadanie
+const pumb = new XMLHttpRequest();
+
+pumb.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
+
+pumb.onload = function () {
+  const data = JSON.parse(pumb.responseText);
+
   console.log("Задание 2:");
-  console.log(data);
-});
+  data.forEach((post) => {
+    console.log(post.title);
+  });
+};
 
-//3 zadanie
-fetch("https://jsonplaceholder.typicode.com/nonexistent")
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Ошибка запроса");
-    }
-    return response.json();
-  })
-  .then(data => console.log(data))
-  .catch(error => {
-    console.log("Задание 3:");
-    console.error("Произошла ошибка:", error.message);
+pumb.send();
+
+//3-6 zadanie
+const loader = document.getElementById("loader");
+const postsContainer = document.getElementById("posts");
+
+const xhr = new XMLHttpRequest();
+
+xhr.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
+
+xhr.onload = function () {
+  if (xhr.status !== 200) {
+    showError("Ошибка загрузки данных");
+    return;
+  }
+
+  loader.remove();
+
+  const data = JSON.parse(xhr.responseText);
+
+  const ul = document.createElement("ul");
+
+  data.forEach((post) => {
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      <h3>${post.title}</h3>
+      <p>${post.body}</p>
+      <small>User ID: ${post.userId}</small>
+    `;
+
+    ul.appendChild(li);
   });
 
-//4 zadanie
-//PUT
-fetch("https://jsonplaceholder.typicode.com/posts/1", {
-  method: "PUT",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    id: 1,
-    title: "Обновленный заголовок",
-    body: "Новое содержимое",
-    userId: 1
-  })
-})
-.then(response => response.json())
-.then(data => {
-  console.log("PUT результат:");
-  console.log(data);
-});
-//DELETE
-fetch("https://jsonplaceholder.typicode.com/posts/1", {
-  method: "DELETE"
-})
-.then(response => {
-  console.log("DELETE результат:");
-  console.log("Пост удален", response.status);
-});
+  postsContainer.appendChild(ul);
+};
 
-//5 zadanie
-async function getPost() {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+xhr.onerror = function () {
+  showError("Сервер не отвечает");
+};
 
-    if (!response.ok) {
-      throw new Error("Ошибка загрузки");
-    }
+xhr.send();
 
-    const data = await response.json();
-    console.log("Задание 5:");
-    console.log(data);
-
-  } catch (error) {
-    console.error("Ошибка:", error.message);
-  }
+function showError(message) {
+  loader.innerText = message;
 }
-
-getPost();
-
-//6 zadanie
-fetch("https://jsonplaceholder.typicode.com/comments", {
-  method: "GET",
-  headers: {
-    "Authorization": "Bearer my-token",
-    "User-Agent": "fetch-example"
-  }
-})
-.then(response => response.json())
-.then(data => {
-  console.log("Задание 6:");
-  console.log(data);
-});
