@@ -5,22 +5,32 @@
 * {
   box-sizing: border-box;
 }
+
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   padding: 0 56px;
   margin: 0;
   font-family: Inter, sans-serif;
+  overflow-y: auto;
 }
 .create-news-btn {
   position: fixed;
-  right: 80px;
-  bottom: 60px;
+  bottom: 30px;
+  right: 30px;
   width: 80px;
   height: 80px;
   border-radius: 50%;
   border: none;
   background: #3cb371;
   color: white;
-  font-size: 32px;
+  font-size: 24px;
   cursor: pointer;
   display: flex;
   align-items: center;

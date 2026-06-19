@@ -3,6 +3,7 @@ button {
   height: auto;
   display: flex;
   align-items: center;
+  border: none;
 }
 .button--blue {
   background-color: rgba(0, 119, 182, 1);
@@ -13,7 +14,7 @@ button {
   text-decoration: none;
 }
 .button--red {
-  background-color: rgba(193, 18, 31, 1);
+  background-color: rgba(193, 18, 31, 1) !important;
   border-radius: 8px;
   color: #ffffff;
   font-size: 16px;
